@@ -113,14 +113,20 @@ section {
 /* スマートフォン表示用の調整 */
 @media screen and (max-width: 768px) {
     .header-inner {
-        flex-direction: column; /* 縦並びに変更 */
-        gap: 10px;
-    }
-    .global-nav ul {
-        gap: 15px;
+        flex-wrap: wrap; /* 画面幅に合わせて折り返せるように変更（デフォルトの横並びを維持） */
+        gap: 5px; /* 折り返した時の上下の隙間 */
     }
     .logo {
-        font-size: 1.5rem;
+        font-size: 1.8rem; /* 店名を大きく */
+    }
+    .global-nav {
+        margin-left: auto; /* コンテンツ名を右に寄せる */
+    }
+    .global-nav ul {
+        gap: 12px; /* 間隔を調整 */
+    }
+    .global-nav a {
+        font-size: 0.85rem; /* コンテンツ名を小さく */
     }
 }
 
@@ -195,13 +201,29 @@ main {
 /* スマートフォン表示の調整 */
 @media screen and (max-width: 768px) {
     .hero {
-        /* スマホでは背景固定がカクつくことがあるため、通常のスクロールに戻すのが一般的です */
+        background-image: none; /* 親要素の背景画像は解除し、画像の過度な拡大を防ぐ */
         background-attachment: scroll; 
         min-height: auto;
-        padding: 140px 20px 80px; /* ヘッダーが上に被る分を考慮します */
+        padding: 0; /* paddingをリセット */
+        display: flex;
+        flex-direction: column; /* 画像(疑似要素)とテキストを縦並びに分離する */
+    }
+    .hero::before {
+        position: relative; /* オーバーレイではなく独立した画像ブロックにする */
+        display: block;
+        height: 100vw; /* 画面幅と同じ高さ（正方形）にして画像を大きく見せる */
+        /* PCと同じ薄い白いフィルター（rgba(255, 255, 255, 0.15)）を画像の上に重ねる */
+        background-image: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), url('img/hero.jpg');
+        background-size: cover;
+        background-position: center;
     }
     .hero-content {
-        padding: 40px 25px;
+        background-color: #fcfaf2; /* コンセプト部分はページの背景色で塗りつぶす */
+        backdrop-filter: none; /* すりガラス効果を解除 */
+        box-shadow: none; /* 影を解除 */
+        padding: 50px 20px; /* 上下の余白 */
+        border-radius: 0; /* 角丸を解除 */
+        max-width: 100%;
     }
     .hero-title {
         font-size: 2.2rem;
