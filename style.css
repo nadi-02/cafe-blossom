@@ -1,0 +1,371 @@
+@charset "UTF-8";
+
+/* 
+ CSSの基本設定 
+ box-sizing: 要素の幅や高さの計算に、余白（padding）や枠線（border）を含める設定です。
+ これを設定すると、レイアウト崩れを防ぎやすくなります。
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 全体の基本スタイル */
+body {
+    /* フォントファミリー: 丸みのある可愛らしい「Zen Maru Gothic」を使用します。
+       読み込めなかった場合の予備として他の丸ゴシック系も指定しています。 */
+    font-family: 'Zen Maru Gothic', "Hiragino Maru Gothic ProN", "Yu Rounded", sans-serif;
+    color: #6b4c4c; /* テキストカラー: ブラウン */
+    background-color: #fcfaf2; /* 背景色: クリーム色（柔らかい雰囲気を出すため完全な白は避けています） */
+    line-height: 1.8; /* 行間を少し広めにして読みやすくします */
+}
+
+/* リンクの基本スタイル */
+a {
+    text-decoration: none; /* デフォルトの下線を消します */
+    color: inherit; /* 親要素の色を引き継ぎます */
+}
+
+/* 画像が親要素（コンテナ）をはみ出さないようにする設定 */
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+/* 共通コンテナ: コンテンツの最大幅を制限し、画面の中央に配置します */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* セクション（各コンテンツのまとまり）の共通スタイル */
+section {
+    padding: 80px 0; /* 上下に余白を持たせてゆったりとしたレイアウトにします */
+}
+
+/* セクションタイトルのスタイル */
+.section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif; /* おしゃれな英字フォントを適用して今っぽく */
+    font-size: 2.5rem; /* 存在感を出すために少し大きくしました */
+    margin-bottom: 40px;
+    color: #a87e7e; /* やや明るめのブラウン/ダスティピンク */
+    letter-spacing: 0.05em;
+}
+
+/* =========================================
+   ヘッダー (Header)
+========================================= */
+.header {
+    background-color: rgba(245, 230, 230, 0.75); /* 背景のピンクベージュを半透明にして透かします */
+    backdrop-filter: blur(8px); /* すりガラス効果で、透けつつも文字が読みやすいようにおしゃれにぼかします */
+    padding: 15px 0;
+    position: fixed; /* 画面上部に固定します */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* 他の要素より手前に表示させます */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* スクロール時の変化を滑らかにします */
+}
+
+/* スクロール時にJavaScriptで付与されるクラス（影をつけます） */
+.header.scrolled {
+    background-color: rgba(245, 230, 230, 0.9); /* スクロール時は少しだけ不透明度を上げます */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif; /* おしゃれな英字フォントを適用して今っぽく */
+    color: #6b4c4c; /* 文字色: ブラウン */
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+/* ナビゲーションメニューのスタイル */
+.global-nav ul {
+    display: flex;
+    list-style: none; /* デフォルトの箇条書きマークを消します */
+    gap: 25px;
+}
+
+.global-nav a {
+    font-family: 'Playfair Display', serif; /* おしゃれな英字フォントを適用して今っぽく */
+    color: #6b4c4c;
+    font-weight: 600; /* 少し太字にして読みやすく */
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.global-nav a:hover {
+    color: #a87e7e; /* マウスオーバー時（カーソルを乗せた時）に色を変えます */
+}
+
+/* スマートフォン表示用の調整 */
+@media screen and (max-width: 768px) {
+    .header-inner {
+        flex-direction: column; /* 縦並びに変更 */
+        gap: 10px;
+    }
+    .global-nav ul {
+        gap: 15px;
+    }
+    .logo {
+        font-size: 1.5rem;
+    }
+}
+
+/* =========================================
+   メインビジュアル (Hero)
+========================================= */
+main {
+    /* ヘッダーの後ろまでヒーロー画像が広がるように、上部の余白をなくしました */
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 80vh; /* 画面の80%の高さを最低限確保します */
+    
+    /* 背景画像の設定 */
+    background-image: url('img/hero.jpg');
+    background-size: cover; /* 画像を枠いっぱいに広げます */
+    background-position: center; /* 画像の中央を表示します */
+    
+    /* ↓これがスクロールで背景が固定されるパララックス効果の肝です */
+    background-attachment: fixed; 
+    
+    /* 中のテキストを画面の中央に配置するための設定です */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 20px 60px; /* ヘッダーが上に被る分、上側の余白を多めに取って文字が隠れないようにします */
+}
+
+/* 画像の上に半透明の白い幕（オーバーレイ）を被せます */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.15); /* 画像がはっきり見えるようにかなり薄くしました */
+    z-index: 1; /* 背景より手前、テキストより奥に配置 */
+}
+
+/* テキストが入る箱のスタイル（画像が目立つように控えめに調整） */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 252, 245, 0.6); /* 透明度を上げて背景画像を透かします */
+    backdrop-filter: blur(4px); /* すりガラスのようにぼかすことで、文字の読みやすさとおしゃれさを両立させます */
+    padding: 35px 40px; /* 箱のサイズを少し小さくしました */
+    border-radius: 10px;
+    max-width: 650px; /* 幅を狭めて画像が見える面積を増やしました */
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03); /* 影も薄く控えめに */
+}
+
+/* ヒーロー内のタイトル（Concept） */
+.hero-title {
+    font-family: 'Playfair Display', serif; /* おしゃれな英字フォント */
+    font-size: 2.2rem; /* 主張しすぎないように少し小さくしました */
+    margin-bottom: 15px;
+    color: #8c6868; /* 色も少し落ち着かせました */
+    letter-spacing: 0.05em;
+}
+
+/* コンセプトの文章 */
+.hero-text {
+    font-size: 1.05rem; /* 主張しすぎないように少し小さくしました */
+    line-height: 2; /* 行間を調整 */
+    color: #5a4238; /* テキストの背景が薄くなった分、文字色を少し濃くして読みやすくしました */
+}
+
+/* スマートフォン表示の調整 */
+@media screen and (max-width: 768px) {
+    .hero {
+        /* スマホでは背景固定がカクつくことがあるため、通常のスクロールに戻すのが一般的です */
+        background-attachment: scroll; 
+        min-height: auto;
+        padding: 140px 20px 80px; /* ヘッダーが上に被る分を考慮します */
+    }
+    .hero-content {
+        padding: 40px 25px;
+    }
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    .hero-text {
+        font-size: 1rem;
+        text-align: left; /* スマホでは左揃えの方が見やすいです */
+    }
+    .hero-text br {
+        display: none; /* スマホでは自然に折り返させるため改行を消します */
+    }
+}
+
+/* =========================================
+   メニュー (Menu)
+========================================= */
+.menu-items {
+    display: grid; /* Gridレイアウトを使用して、折り返した際も要素の幅を均等に揃えます */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 画面幅に合わせて自動で列数を調整します */
+    gap: 30px; /* 要素間の隙間（余白） */
+}
+
+.menu-item {
+    background-color: #ffffff; /* 白背景 */
+    border-radius: 15px; /* 角丸: 丸みを出して柔らかい雰囲気にします */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* 薄い影をつけて少し浮き出ているように見せます */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* ホバーした時のアニメーションをなめらかにします */
+}
+
+/* 商品（メニュー）にマウスを乗せたときの動き（少し大きくして影を濃くします） */
+.menu-item:hover {
+    transform: scale(1.03) translateY(-5px); /* 全体を3%大きくし、上に5px浮かせます */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); /* 影を濃くして浮遊感を強調します */
+}
+
+.menu-img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 正方形にトリミングします */
+    object-fit: cover;
+    border-radius: 10px; /* 画像も少し角丸にします */
+    margin-bottom: 15px;
+}
+
+/* 商品名と料金を並べるラッパー */
+.menu-title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: baseline; /* 文字の下端を揃えます（商品名の右下に料金がくるように見せます） */
+    gap: 8px; /* 商品名と料金の間の隙間 */
+    margin-bottom: 12px;
+}
+
+.menu-name {
+    font-size: 1.3rem;
+    margin-bottom: 0; /* ラッパーで余白を持つため0にします */
+    color: #a87e7e; /* メインカラーと合わせています */
+}
+
+/* 料金のスタイル */
+.menu-price {
+    font-size: 1rem; /* 商品名より少し小さく表示します */
+    font-weight: bold;
+    color: #6b4c4c; /* テキストカラーのブラウン */
+    margin-bottom: 0; /* ラッパーで余白を持つため0にします */
+    font-family: 'Playfair Display', serif; /* 数字もおしゃれな英字フォントに合わせます */
+}
+
+.menu-desc {
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+/* =========================================
+   店舗情報とアクセス (Information)
+========================================= */
+.info {
+    background-color: #ffffff; /* 白背景 */
+}
+
+.info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.info-content {
+    flex: 1 1 40%;
+    min-width: 300px;
+}
+
+.info-map {
+    flex: 1 1 50%;
+    min-width: 300px;
+    border-radius: 15px;
+    overflow: hidden; /* 角丸からはみ出たマップ（iframe）を隠すための設定です */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.shop-name {
+    font-family: 'Playfair Display', serif; /* おしゃれな英字フォントを適用して今っぽく */
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #6b4c4c;
+}
+
+.shop-name-sub {
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+.info-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+    border-top: 1px dashed #f5e6e6; /* 区切り線を点線にして可愛らしく */
+}
+
+.info-list dt, .info-list dd {
+    padding: 15px 0;
+    border-bottom: 1px dashed #f5e6e6;
+}
+
+.info-list dt {
+    width: 35%;
+    font-weight: bold;
+    color: #a87e7e;
+}
+
+.info-list dd {
+    width: 65%;
+}
+
+/* インスタグラムボタンのスタイル（アイコン＋テキスト用） */
+.btn-instagram {
+    display: inline-flex; /* アイコンと文字を横に並べます */
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* アイコンと文字の間に少しだけ隙間を作ります */
+    background-color: #a87e7e; /* ボタン背景色: ピンクブラウン系 */
+    color: #ffffff;
+    padding: 12px 35px; /* 元の横長ボタンのような余白を設定します */
+    border-radius: 30px; /* 角丸の横長ボタンにして可愛らしく */
+    font-weight: 600; /* 文字を少し太くして読みやすく */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* アニメーションの設定 */
+    box-shadow: 0 4px 10px rgba(168, 126, 126, 0.3);
+}
+
+.btn-instagram:hover {
+    background-color: #8c6868; /* ホバー時（マウスカーソルを乗せた時）に少し暗くします */
+    transform: translateY(-3px); /* マウスを乗せると少し上に浮くような動きをつけます */
+}
+
+/* =========================================
+   フッター (Footer)
+========================================= */
+.footer {
+    background-color: #f5e6e6; /* ピンクベージュ */
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    color: #6b4c4c;
+}
