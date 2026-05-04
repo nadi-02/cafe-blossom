@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+/* =============================================
+   カスタムプロパティ（CSS変数）
+   配色をまとめて管理することで、後から変更しやすくなります
+============================================= */
+:root {
+    --color-pink-beige: #F5DCE0;  /* ピンクベージュ: メインのアクセントカラー */
+    --color-cream: #FFF8E7;        /* クリーム色: 背景の温かみを出す色 */
+    --color-white: #FFFFFF;        /* 白: カードや清潔感のあるエリアに */
+    --color-text: #6b4c4c;         /* テキストカラー: ブラウン系で柔らかい印象 */
+    --color-accent: #a87e7e;       /* アクセント: セクションタイトルやボタンに */
+    --color-accent-dark: #8c6868;  /* アクセント（暗め）: ホバー時などに */
+}
+
 /* 
  CSSの基本設定 
  box-sizing: 要素の幅や高さの計算に、余白（padding）や枠線（border）を含める設定です。
@@ -11,13 +24,13 @@
     padding: 0;
 }
 
-/* 全体の基本スタイル */
+/* 全体の基本スタイル（モバイルファースト: まずスマホ向けの設定を書きます） */
 body {
     /* フォントファミリー: 丸みのある可愛らしい「Zen Maru Gothic」を使用します。
        読み込めなかった場合の予備として他の丸ゴシック系も指定しています。 */
     font-family: 'Zen Maru Gothic', "Hiragino Maru Gothic ProN", "Yu Rounded", sans-serif;
-    color: #6b4c4c; /* テキストカラー: ブラウン */
-    background-color: #fcfaf2; /* 背景色: クリーム色（柔らかい雰囲気を出すため完全な白は避けています） */
+    color: var(--color-text);
+    background-color: var(--color-cream); /* 背景色: クリーム色 */
     line-height: 1.8; /* 行間を少し広めにして読みやすくします */
 }
 
@@ -43,16 +56,16 @@ img {
 
 /* セクション（各コンテンツのまとまり）の共通スタイル */
 section {
-    padding: 80px 0; /* 上下に余白を持たせてゆったりとしたレイアウトにします */
+    padding: 60px 0; /* モバイルではやや控えめな余白 */
 }
 
 /* セクションタイトルのスタイル */
 .section-title {
     text-align: center;
     font-family: 'Playfair Display', serif; /* おしゃれな英字フォントを適用して今っぽく */
-    font-size: 2.5rem; /* 存在感を出すために少し大きくしました */
-    margin-bottom: 40px;
-    color: #a87e7e; /* やや明るめのブラウン/ダスティピンク */
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--color-accent);
     letter-spacing: 0.05em;
 }
 
@@ -60,20 +73,20 @@ section {
    ヘッダー (Header)
 ========================================= */
 .header {
-    background-color: rgba(245, 230, 230, 0.75); /* 背景のピンクベージュを半透明にして透かします */
-    backdrop-filter: blur(8px); /* すりガラス効果で、透けつつも文字が読みやすいようにおしゃれにぼかします */
-    padding: 15px 0;
+    background-color: rgba(245, 220, 224, 0.75); /* ピンクベージュを半透明にして透かします */
+    backdrop-filter: blur(8px); /* すりガラス効果 */
+    padding: 10px 0;
     position: fixed; /* 画面上部に固定します */
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000; /* 他の要素より手前に表示させます */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* スクロール時の変化を滑らかにします */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* スクロール時にJavaScriptで付与されるクラス（影をつけます） */
 .header.scrolled {
-    background-color: rgba(245, 230, 230, 0.9); /* スクロール時は少しだけ不透明度を上げます */
+    background-color: rgba(245, 220, 224, 0.92);
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
@@ -83,10 +96,25 @@ section {
     align-items: center;
 }
 
+/* ロゴ画像と店名を横並びにするラッパー */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* ロゴ画像と店名の間の隙間 */
+}
+
+/* ロゴ画像のスタイル */
+.logo-img {
+    width: 36px; /* ロゴ画像のサイズ */
+    height: 36px;
+    border-radius: 50%; /* 丸く切り抜いてアイコン風に */
+    object-fit: cover;
+}
+
 .logo {
-    font-family: 'Playfair Display', serif; /* おしゃれな英字フォントを適用して今っぽく */
-    color: #6b4c4c; /* 文字色: ブラウン */
-    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--color-text);
+    font-size: 1.5rem; /* モバイルでは少し小さめ */
     font-weight: 700;
     letter-spacing: 0.02em;
 }
@@ -95,69 +123,73 @@ section {
 .global-nav ul {
     display: flex;
     list-style: none; /* デフォルトの箇条書きマークを消します */
-    gap: 25px;
+    gap: 15px; /* モバイルでは間隔を狭めに */
 }
 
 .global-nav a {
-    font-family: 'Playfair Display', serif; /* おしゃれな英字フォントを適用して今っぽく */
-    color: #6b4c4c;
-    font-weight: 600; /* 少し太字にして読みやすく */
-    font-size: 1.1rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 0.9rem; /* モバイルでは小さめ */
     transition: color 0.3s ease;
 }
 
 .global-nav a:hover {
-    color: #a87e7e; /* マウスオーバー時（カーソルを乗せた時）に色を変えます */
-}
-
-/* スマートフォン表示用の調整 */
-@media screen and (max-width: 768px) {
-    .header-inner {
-        flex-wrap: wrap; /* 画面幅に合わせて折り返せるように変更（デフォルトの横並びを維持） */
-        gap: 5px; /* 折り返した時の上下の隙間 */
-    }
-    .logo {
-        font-size: 1.8rem; /* 店名を大きく */
-    }
-    .global-nav {
-        margin-left: auto; /* コンテンツ名を右に寄せる */
-    }
-    .global-nav ul {
-        gap: 12px; /* 間隔を調整 */
-    }
-    .global-nav a {
-        font-size: 0.85rem; /* コンテンツ名を小さく */
-    }
+    color: var(--color-accent);
 }
 
 /* =========================================
-   メインビジュアル (Hero)
+   ヒーローセクション (Hero)
+   ヒーロー画像とキャッチコピーを表示するエリア
 ========================================= */
-main {
-    /* ヘッダーの後ろまでヒーロー画像が広がるように、上部の余白をなくしました */
-}
-
 .hero {
     position: relative;
     width: 100%;
-    min-height: 80vh; /* 画面の80%の高さを最低限確保します */
+    height: 100vw; /* モバイル: 画面幅と同じ高さ（正方形） */
     
-    /* 背景画像の設定 */
+    /* 背景画像の設定（既存のhero.jpgをそのまま使用） */
     background-image: url('img/hero.jpg');
-    background-size: cover; /* 画像を枠いっぱいに広げます */
-    background-position: center; /* 画像の中央を表示します */
+    background-size: cover;
+    background-position: center;
     
-    /* ↓これがスクロールで背景が固定されるパララックス効果の肝です */
-    background-attachment: fixed; 
-    
-    /* 中のテキストを画面の中央に配置するための設定です */
+    /* 中のキャッチコピーを中央に配置 */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 120px 20px 60px; /* ヘッダーが上に被る分、上側の余白を多めに取って文字が隠れないようにします */
 }
 
-/* 画像の上に半透明の白い幕（オーバーレイ）を被せます */
+/* ヒーロー画像の上に半透明のオーバーレイを重ねます */
+.hero-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 30px 25px;
+    /* すりガラス風の背景で文字を読みやすく */
+    background-color: rgba(255, 248, 231, 0.55);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+/* キャッチコピーのスタイル */
+.hero-catchcopy {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 0.12em; /* 文字間を広げて上品に */
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+/* ヒーロー内の店名サブテキスト */
+.hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+}
+
+/* ヒーロー画像の上に薄い白フィルターを重ねる疑似要素 */
 .hero::before {
     content: '';
     position: absolute;
@@ -165,107 +197,65 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.15); /* 画像がはっきり見えるようにかなり薄くしました */
-    z-index: 1; /* 背景より手前、テキストより奥に配置 */
+    background-color: rgba(255, 255, 255, 0.15);
+    z-index: 1;
 }
 
-/* テキストが入る箱のスタイル（画像が目立つように控えめに調整） */
-.hero-content {
-    position: relative;
-    z-index: 2;
-    background-color: rgba(255, 252, 245, 0.6); /* 透明度を上げて背景画像を透かします */
-    backdrop-filter: blur(4px); /* すりガラスのようにぼかすことで、文字の読みやすさとおしゃれさを両立させます */
-    padding: 35px 40px; /* 箱のサイズを少し小さくしました */
-    border-radius: 10px;
-    max-width: 650px; /* 幅を狭めて画像が見える面積を増やしました */
+/* =========================================
+   コンセプト (Concept)
+========================================= */
+.concept {
+    background-color: var(--color-cream);
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.03); /* 影も薄く控えめに */
 }
 
-/* ヒーロー内のタイトル（Concept） */
-.hero-title {
-    font-family: 'Playfair Display', serif; /* おしゃれな英字フォント */
-    font-size: 2.2rem; /* 主張しすぎないように少し小さくしました */
-    margin-bottom: 15px;
-    color: #8c6868; /* 色も少し落ち着かせました */
-    letter-spacing: 0.05em;
+.concept-text {
+    font-size: 1rem;
+    line-height: 2.2;
+    color: #5a4238;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* コンセプトの文章 */
-.hero-text {
-    font-size: 1.05rem; /* 主張しすぎないように少し小さくしました */
-    line-height: 2; /* 行間を調整 */
-    color: #5a4238; /* テキストの背景が薄くなった分、文字色を少し濃くして読みやすくしました */
-}
-
-/* スマートフォン表示の調整 */
-@media screen and (max-width: 768px) {
-    .hero {
-        background-image: none; /* 親要素の背景画像は解除し、画像の過度な拡大を防ぐ */
-        background-attachment: scroll; 
-        min-height: auto;
-        padding: 0; /* paddingをリセット */
-        display: flex;
-        flex-direction: column; /* 画像(疑似要素)とテキストを縦並びに分離する */
-    }
-    .hero::before {
-        position: relative; /* オーバーレイではなく独立した画像ブロックにする */
-        display: block;
-        height: 100vw; /* 画面幅と同じ高さ（正方形）にして画像を大きく見せる */
-        /* PCと同じ薄い白いフィルター（rgba(255, 255, 255, 0.15)）を画像の上に重ねる */
-        background-image: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), url('img/hero.jpg');
-        background-size: cover;
-        background-position: center;
-    }
-    .hero-content {
-        background-color: #fcfaf2; /* コンセプト部分はページの背景色で塗りつぶす */
-        backdrop-filter: none; /* すりガラス効果を解除 */
-        box-shadow: none; /* 影を解除 */
-        padding: 50px 20px; /* 上下の余白 */
-        border-radius: 0; /* 角丸を解除 */
-        max-width: 100%;
-    }
-    .hero-title {
-        font-size: 2.2rem;
-    }
-    .hero-text {
-        font-size: 1rem;
-        text-align: left; /* スマホでは左揃えの方が見やすいです */
-    }
-    .hero-text br {
-        display: none; /* スマホでは自然に折り返させるため改行を消します */
-    }
+/* モバイルではbrを非表示にして自然に折り返す */
+.concept-text br {
+    display: none;
 }
 
 /* =========================================
    メニュー (Menu)
 ========================================= */
+.menu {
+    background-color: var(--color-white);
+}
+
 .menu-items {
-    display: grid; /* Gridレイアウトを使用して、折り返した際も要素の幅を均等に揃えます */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 画面幅に合わせて自動で列数を調整します */
-    gap: 30px; /* 要素間の隙間（余白） */
+    display: grid;
+    /* モバイルファースト: 1列表示 */
+    grid-template-columns: 1fr;
+    gap: 25px;
 }
 
 .menu-item {
-    background-color: #ffffff; /* 白背景 */
-    border-radius: 15px; /* 角丸: 丸みを出して柔らかい雰囲気にします */
-    padding: 20px;
+    background-color: var(--color-white);
+    border-radius: 15px;
+    padding: 18px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* 薄い影をつけて少し浮き出ているように見せます */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* ホバーした時のアニメーションをなめらかにします */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 商品（メニュー）にマウスを乗せたときの動き（少し大きくして影を濃くします） */
+/* 商品にマウスを乗せたときの動き */
 .menu-item:hover {
-    transform: scale(1.03) translateY(-5px); /* 全体を3%大きくし、上に5px浮かせます */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08); /* 影を濃くして浮遊感を強調します */
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 .menu-img {
     width: 100%;
     aspect-ratio: 1 / 1; /* 正方形にトリミングします */
     object-fit: cover;
-    border-radius: 10px; /* 画像も少し角丸にします */
+    border-radius: 10px;
     margin-bottom: 15px;
 }
 
@@ -273,121 +263,257 @@ main {
 .menu-title-wrapper {
     display: flex;
     justify-content: center;
-    align-items: baseline; /* 文字の下端を揃えます（商品名の右下に料金がくるように見せます） */
-    gap: 8px; /* 商品名と料金の間の隙間 */
-    margin-bottom: 12px;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
 .menu-name {
-    font-size: 1.3rem;
-    margin-bottom: 0; /* ラッパーで余白を持つため0にします */
-    color: #a87e7e; /* メインカラーと合わせています */
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    color: var(--color-accent);
 }
 
 /* 料金のスタイル */
 .menu-price {
-    font-size: 1rem; /* 商品名より少し小さく表示します */
+    font-size: 1rem;
     font-weight: bold;
-    color: #6b4c4c; /* テキストカラーのブラウン */
-    margin-bottom: 0; /* ラッパーで余白を持つため0にします */
-    font-family: 'Playfair Display', serif; /* 数字もおしゃれな英字フォントに合わせます */
+    color: var(--color-text);
+    margin-bottom: 0;
+    font-family: 'Playfair Display', serif;
 }
 
 .menu-desc {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     text-align: left;
+    color: #6b5a5a;
 }
 
 /* =========================================
    店舗情報とアクセス (Information)
 ========================================= */
 .info {
-    background-color: #ffffff; /* 白背景 */
+    background-color: var(--color-white);
 }
 
+/* モバイルファースト: 縦並び */
 .info-wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 50px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .info-content {
-    flex: 1 1 40%;
-    min-width: 300px;
+    width: 100%;
 }
 
 .info-map {
-    flex: 1 1 50%;
-    min-width: 300px;
+    width: 100%;
     border-radius: 15px;
-    overflow: hidden; /* 角丸からはみ出たマップ（iframe）を隠すための設定です */
+    overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .shop-name {
-    font-family: 'Playfair Display', serif; /* おしゃれな英字フォントを適用して今っぽく */
-    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 25px;
-    color: #6b4c4c;
+    margin-bottom: 20px;
+    color: var(--color-text);
 }
 
 .shop-name-sub {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: normal;
 }
 
 .info-list {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 35px;
-    border-top: 1px dashed #f5e6e6; /* 区切り線を点線にして可愛らしく */
+    margin-bottom: 0; /* インスタボタンがフッターに移動したので余白を調整 */
+    border-top: 1px dashed var(--color-pink-beige);
 }
 
 .info-list dt, .info-list dd {
-    padding: 15px 0;
-    border-bottom: 1px dashed #f5e6e6;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--color-pink-beige);
 }
 
 .info-list dt {
     width: 35%;
     font-weight: bold;
-    color: #a87e7e;
+    color: var(--color-accent);
 }
 
 .info-list dd {
     width: 65%;
 }
 
-/* インスタグラムボタンのスタイル（アイコン＋テキスト用） */
-.btn-instagram {
-    display: inline-flex; /* アイコンと文字を横に並べます */
-    justify-content: center;
-    align-items: center;
-    gap: 8px; /* アイコンと文字の間に少しだけ隙間を作ります */
-    background-color: #a87e7e; /* ボタン背景色: ピンクブラウン系 */
-    color: #ffffff;
-    padding: 12px 35px; /* 元の横長ボタンのような余白を設定します */
-    border-radius: 30px; /* 角丸の横長ボタンにして可愛らしく */
-    font-weight: 600; /* 文字を少し太くして読みやすく */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* アニメーションの設定 */
-    box-shadow: 0 4px 10px rgba(168, 126, 126, 0.3);
+/* 電話番号リンクのスタイル: タップで電話をかけられます */
+.tel-link {
+    color: var(--color-text);
+    text-decoration: underline; /* リンクであることを示す下線 */
+    text-decoration-color: var(--color-pink-beige); /* 下線の色をピンクベージュに */
+    text-underline-offset: 3px; /* 下線の位置を少し下にずらして見やすく */
+    transition: color 0.3s ease;
 }
 
-.btn-instagram:hover {
-    background-color: #8c6868; /* ホバー時（マウスカーソルを乗せた時）に少し暗くします */
-    transform: translateY(-3px); /* マウスを乗せると少し上に浮くような動きをつけます */
+.tel-link:hover {
+    color: var(--color-accent);
 }
 
 /* =========================================
    フッター (Footer)
+   インスタグラムリンクをここに配置
 ========================================= */
 .footer {
-    background-color: #f5e6e6; /* ピンクベージュ */
+    background-color: var(--color-pink-beige);
     text-align: center;
-    padding: 20px 0;
-    font-size: 0.9rem;
-    color: #6b4c4c;
+    padding: 30px 0 20px;
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* インスタグラムボタンのスタイル（アイコン＋テキスト用） */
+.btn-instagram {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(168, 126, 126, 0.3);
+}
+
+.btn-instagram:hover {
+    background-color: var(--color-accent-dark);
+    transform: translateY(-3px);
+}
+
+.footer-copy {
+    font-size: 0.85rem;
+    color: var(--color-text);
+}
+
+/* =========================================
+   タブレット以上のレスポンシブ対応 (768px〜)
+   モバイルファーストなので、大きい画面向けの追加スタイルをここに書きます
+========================================= */
+@media screen and (min-width: 768px) {
+    /* セクションの余白を広く */
+    section {
+        padding: 80px 0;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+
+    /* --- ヘッダー --- */
+    .header {
+        padding: 15px 0;
+    }
+
+    .logo-img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .logo {
+        font-size: 2rem;
+    }
+
+    .global-nav ul {
+        gap: 25px;
+    }
+
+    .global-nav a {
+        font-size: 1.1rem;
+    }
+
+    /* --- ヒーロー --- */
+    .hero {
+        min-height: 80vh; /* PC: 画面の80%の高さを確保 */
+        height: auto;
+        padding: 120px 20px 60px;
+        /* パララックス効果: スクロールで背景が固定される */
+        background-attachment: fixed;
+    }
+
+    .hero-overlay {
+        padding: 40px 50px;
+        max-width: 500px;
+    }
+
+    .hero-catchcopy {
+        font-size: 2rem;
+    }
+
+    .hero-sub {
+        font-size: 1.2rem;
+    }
+
+    /* --- コンセプト --- */
+    .concept-text {
+        font-size: 1.05rem;
+    }
+
+    /* PCではbrを表示して意図的な改行をする */
+    .concept-text br {
+        display: inline;
+    }
+
+    /* --- メニュー --- */
+    .menu-items {
+        /* タブレット以上: 2列に並べます */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .menu-name {
+        font-size: 1.3rem;
+    }
+
+    /* --- 店舗情報 --- */
+    .info-wrapper {
+        flex-direction: row; /* 横並びに変更 */
+        justify-content: space-between;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .info-content {
+        flex: 1 1 40%;
+        min-width: 300px;
+    }
+
+    .info-map {
+        flex: 1 1 50%;
+        min-width: 300px;
+    }
+
+    .shop-name {
+        font-size: 2.2rem;
+    }
+}
+
+/* =========================================
+   PC向けの追加調整 (1024px〜)
+========================================= */
+@media screen and (min-width: 1024px) {
+    .menu-items {
+        /* 大きい画面では4品を横一列に表示 */
+        grid-template-columns: repeat(4, 1fr);
+    }
 }

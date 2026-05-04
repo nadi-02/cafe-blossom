@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- title tag: ページのタイトル。ブラウザのタブに表示されます -->
-    <title>Cafe Blossom | 埼玉県川越市のカフェ</title>
+    <title>Cafe Blossom | 東京都渋谷区のカフェ</title>
     <!-- meta description: ページの説明。検索結果などに表示されます -->
-    <meta name="description" content="埼玉県川越市にある小さなカフェ「Cafe Blossom」。ナチュラルで温かみのある空間で、こだわりのコーヒーやスイーツをお楽しみください。">
+    <meta name="description" content="東京都渋谷区にある小さなカフェ「Cafe Blossom」。ナチュラルで温かみのある空間で、こだわりのコーヒーやスイーツをお楽しみください。">
+    <!-- favicon: ブラウザのタブに表示される小さなアイコン（桜マーク） -->
+    <link rel="icon" href="img/favicon.png" type="image/png">
     <!-- Google Fontsの読み込み: 日本語は「Zen Maru Gothic」、英語のロゴ等はおしゃれな「Playfair Display」を使用します -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <!-- CSSファイルの読み込み -->
     <link rel="stylesheet" href="style.css">
     <!-- JavaScriptファイルの読み込み -->
     <script src="script.js" defer></script>
 </head>
+
 <body>
-    <!-- ヘッダー部分: ロゴとナビゲーションメニューが含まれます -->
+    <!-- ヘッダー部分: ロゴ画像・店名・ナビゲーションメニューが含まれます -->
     <header class="header" id="header">
         <div class="header-inner container">
-            <h1 class="logo">Cafe Blossom</h1>
+            <!-- ロゴ画像と店名を横並びに表示 -->
+            <div class="logo-wrapper">
+                <img src="img/logo.png" alt="Cafe Blossomのロゴ" class="logo-img">
+                <h1 class="logo">Cafe Blossom</h1>
+            </div>
             <!-- ページ内リンクのナビゲーション -->
             <nav class="global-nav">
                 <ul>
@@ -33,51 +43,72 @@
     </header>
 
     <main>
-        <!-- メインビジュアル兼コンセプト紹介: スクロールで背景が追従するエリア -->
-        <section id="concept" class="hero">
+        <!-- ヒーローセクション: パララックス背景 + キャッチコピー -->
+        <section class="hero">
             <!-- 画像は背景としてCSSで設定します -->
-            <div class="hero-content">
-                <h2 class="hero-title">Concept</h2>
-                <p class="hero-text">
-                    地元の商店街にひっそりと佇む、小さなカフェ「Cafe Blossom」。<br>
-                    日常の喧騒から離れ、ほっと一息つける温かい空間をご用意しています。<br>
-                    こだわりの豆で淹れた一杯のコーヒーと、手作りのスイーツで、<br>
-                    心やすらぐひとときをお過ごしください。
+            <div class="hero-overlay">
+                <!-- キャッチコピー: お店の雰囲気を一言で伝えます。「、」の後で改行しています -->
+                <p class="hero-catchcopy">花ほころぶ、<br>やさしい時間。</p>
+                <p class="hero-sub">Cafe Blossom</p>
+            </div>
+        </section>
+
+        <!-- コンセプト紹介: お店のこだわりを2〜3文で簡潔に -->
+        <section id="concept" class="concept">
+            <div class="container">
+                <h2 class="section-title">Concept</h2>
+                <p class="concept-text">
+                    季節の花が彩る温かな空間で、丁寧に淹れた一杯をお届けします。<br>
+                    素材にこだわった手作りスイーツと、心がほどけるひとときを。<br>
+                    日常にそっと寄り添うカフェでありたいと願っています。
                 </p>
             </div>
         </section>
 
-        <!-- おすすめメニュー -->
+        <!-- おすすめメニュー: 4品を画像・商品名・説明・価格で表示 -->
         <section id="menu" class="menu">
             <div class="container">
                 <h2 class="section-title">Menu</h2>
                 <div class="menu-items">
-                    <!-- メニュー項目1 -->
+                    <!-- メニュー項目1: ストロベリーラテ -->
                     <div class="menu-item">
-                        <img src="img/coffee.jpg" alt="こだわりのブレンドコーヒー" class="menu-img">
+                        <!-- Unsplash無料画像: ストロベリーラテ（ピンク色のいちごミルク系ドリンク） -->
+                        <img src="img/strawberry_latte.png" alt="ストロベリーラテ" class="menu-img">
                         <div class="menu-title-wrapper">
-                            <h3 class="menu-name">ブレンドコーヒー</h3>
-                            <p class="menu-price">&yen;550</p>
-                        </div>
-                        <p class="menu-desc">丁寧に焙煎された豆を使用した、香り高い一杯。</p>
-                    </div>
-                    <!-- メニュー項目2 -->
-                    <div class="menu-item">
-                        <img src="img/tea.jpg" alt="リラックスできるハーブティー" class="menu-img">
-                        <div class="menu-title-wrapper">
-                            <h3 class="menu-name">ハーブティー</h3>
-                            <p class="menu-price">&yen;520</p>
-                        </div>
-                        <p class="menu-desc">心からリラックスできる、優しい香りのオリジナルブレンド。</p>
-                    </div>
-                    <!-- メニュー項目3 -->
-                    <div class="menu-item">
-                        <img src="img/cake.jpg" alt="当店自慢の手作りチーズケーキ" class="menu-img">
-                        <div class="menu-title-wrapper">
-                            <h3 class="menu-name">手作りチーズケーキ</h3>
+                            <h3 class="menu-name">ストロベリーラテ</h3>
                             <p class="menu-price">&yen;650</p>
                         </div>
-                        <p class="menu-desc">濃厚なクリームチーズをたっぷり使用した、なめらかで優しい甘さのチーズケーキ。</p>
+                        <p class="menu-desc">甘酸っぱい苺とミルクが織りなす、見た目も華やかな一杯。</p>
+                    </div>
+                    <!-- メニュー項目2: 季節のタルト -->
+                    <div class="menu-item">
+                        <!-- Unsplash無料画像: フルーツタルト（季節のフルーツが乗ったタルト） -->
+                        <img src="img/seasonal_tart.png" alt="季節のタルト" class="menu-img">
+                        <div class="menu-title-wrapper">
+                            <h3 class="menu-name">季節のタルト</h3>
+                            <p class="menu-price">&yen;580</p>
+                        </div>
+                        <p class="menu-desc">旬のフルーツをたっぷり使った、サクサク生地のタルト。</p>
+                    </div>
+                    <!-- メニュー項目3: ブロッサムブレンド -->
+                    <div class="menu-item">
+                        <!-- Unsplash無料画像: ブレンドコーヒー（カフェのコーヒーカップ） -->
+                        <img src="img/blossom_blend.png" alt="ブロッサムブレンド" class="menu-img">
+                        <div class="menu-title-wrapper">
+                            <h3 class="menu-name">ブロッサムブレンド</h3>
+                            <p class="menu-price">&yen;500</p>
+                        </div>
+                        <p class="menu-desc">花のような華やかな香りが広がる、当店オリジナルブレンド。</p>
+                    </div>
+                    <!-- メニュー項目4: 抹茶カヌレ -->
+                    <div class="menu-item">
+                        <!-- Unsplash無料画像: 抹茶カヌレ（抹茶の焼き菓子） -->
+                        <img src="img/matcha_canele.png" alt="抹茶カヌレ" class="menu-img">
+                        <div class="menu-title-wrapper">
+                            <h3 class="menu-name">抹茶カヌレ</h3>
+                            <p class="menu-price">&yen;420</p>
+                        </div>
+                        <p class="menu-desc">外はカリッと中はもっちり。宇治抹茶を贅沢に使用。</p>
                     </div>
                 </div>
             </div>
@@ -94,30 +125,45 @@
                         <dl class="info-list">
                             <!-- dl, dt, dd: 定義リスト。項目(dt)とその説明(dd)を記述するのに使います -->
                             <dt>住所</dt>
-                            <dd>埼玉県川越市</dd>
+                            <dd>東京都渋谷区○○ 1-2-3</dd>
+                            <dt>TEL</dt>
+                            <dd><a href="tel:03-1234-5678" class="tel-link">03-1234-5678</a></dd>
                             <dt>営業時間</dt>
-                            <dd>10:00～18:00</dd>
+                            <dd>10:00～19:00</dd>
                             <dt>定休日</dt>
-                            <dd>毎週月曜日</dd>
+                            <dd>毎週水曜日</dd>
                         </dl>
-                        <a href="#" class="btn-instagram" target="_blank" rel="noopener noreferrer">
-                            <!-- インスタグラムのSVGロゴアイコン -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                            Instagram
-                        </a>
                     </div>
                     <!-- アクセスマップ: Googleマップの埋め込み -->
                     <div class="info-map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d103328.71887200788!2d139.38139589947935!3d35.922129853920974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018c1a60cc651ad%3A0xe541c8f61ecdb3a2!2z5Z-8546J55yM5bed6LaK5biC!5e0!3m2!1sja!2sjp!4v1714000000000!5m2!1sja!2sjp" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.169451779985!2d139.7054927!3d35.6694902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ca3ef0e948d%3A0x5765c1e5e56bb00c!2z5riL6LC35Yy656We5a6u5YmNMy0yNS0xOA!5e0!3m2!1sja!2sjp!4v1714000000000!5m2!1sja!2sjp"
+                            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- フッター -->
+    <!-- フッター: インスタグラムリンクを移動 -->
     <footer class="footer">
-        <p>&copy; 2026 Cafe Blossom.</p>
+        <div class="footer-inner container">
+            <!-- インスタグラムリンク -->
+            <a href="#" class="btn-instagram" target="_blank" rel="noopener noreferrer">
+                <!-- インスタグラムのSVGロゴアイコン -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-instagram">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                Instagram
+            </a>
+            <p class="footer-copy">&copy; 2026 Cafe Blossom.</p>
+        </div>
     </footer>
 </body>
+
 </html>
